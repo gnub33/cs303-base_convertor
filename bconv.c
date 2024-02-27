@@ -21,7 +21,6 @@ void print_bases(short val, char mode)
     //printf("\n");
     for (size_t i = 0; i<41; ++i)
         putchar('*');
-
 }
 
 char print_menu(void) {
@@ -56,7 +55,7 @@ char print_menu(void) {
             print_menu();
         }
         else {
-            printf("good job\n");
+            //printf("good job\n");
             sleep(1);
             valid ++;
         }
@@ -88,7 +87,7 @@ int main(void)
 {
     int quit = 0;
     int val = 0;
-    char mode[10] = "D";
+    char mode[10] = "Dec";
     char opt;
     while (quit == 0)
     {
@@ -97,18 +96,21 @@ int main(void)
         
         switch(opt) {
             case 'O':
+                val = 0;
                 printf("you chose O");
                 //mode[10] = "O";
-                char o[10] = "O";
+                char o[10] = "Oct";
                 strcpy(mode, o);
                 get_operand(mode[0]); //changes input type to octal mode, ie user enters number with an octal base
                 break;
             case 'H':
+                val = 0;
                 printf("you chose H");
                 char h[3] = "Hex";
                 strcpy(mode, h);
                 break;
-            case 'D':
+            case 'D': 
+                val = 0;
                 printf("you chose D");
                 char d[3] = "Dec";
                 strcpy(mode, d);
@@ -122,6 +124,7 @@ int main(void)
                 printf("please enter a number: ");
                 int newVal = get_operand(mode[0]); //returns input in appropriate base form
                 val = newVal; //updates menu value
+                break;
             case 'Q':
                 printf("Ending program....\n");
                 sleep(1);
