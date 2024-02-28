@@ -1,24 +1,44 @@
+// Daniel Knight
+// CSCI 304
+// 2/27/24
+// Assignment 4 - Base Convertor
+// Program shall display a value in various base representations.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
-//user input prints new menu with correct input mode displayed
-//
 
 void print_bases(short val, char mode)
 {
-    char cmode = mode; //stores first element of array as a char
+    char cmode[4];
+    char oct_str[4] = "Oct"; 
+    char hex_str[4] = "Hex";
+    char dec_str[4] = "Dec";
+    
+    switch(mode)
+    {
+        case 'O':
+            strcpy(cmode, oct_str);
+            break;
+        case 'H':
+            strcpy(cmode, hex_str);
+            break;
+        case 'D':
+            strcpy(cmode, dec_str);
+            break;
+
+    }
 
     for (size_t i = 0; i<41; ++i)
         putchar('*');
     printf("\n");
     printf("* Base values:          ");
-    printf("Input Mode: %c", cmode); printf(" *\n");
-    printf("*   Hex     : %hx\n", val);
-    printf("*   Octal   : %ho\n", val);
+    printf("Input Mode: %s", cmode); printf(" *\n");
+    printf("*   Hex     : %04hX\n", val);
+    printf("*   Octal   : %06ho\n", val);
     printf("*   Decimal : %hd\n", val);
-    //printf("\n");
     for (size_t i = 0; i<41; ++i)
         putchar('*');
 }
@@ -37,7 +57,7 @@ char print_menu(void) {
     printf("\n");
     printf("Q Quit\n");
     printf("\n");
-    printf("Option: \n");
+    printf("Option: ");
 
     char option[10]; //10 char string for errors
     char ohd;
@@ -45,18 +65,16 @@ char print_menu(void) {
     //char mode = "Pot"; //can't reassign strings??
     int valid = 0;
     while(valid == 0){
-        printf("Please enter a valid option: ");
+       // printf("Please enter a valid option: ");
         scanf("%s", option);
         ohd = toupper(option[0]);
 
         if(strlen(option)>1 || !strchr(valid_input, ohd)){
             printf("Input is invalid. Please try again.\n");
-            sleep(2);
+            sleep(1);
             print_menu();
         }
         else {
-            //printf("good job\n");
-            sleep(1);
             valid ++;
         }
     }
@@ -96,27 +114,24 @@ int main(void)
         
         switch(opt) {
             case 'O':
-                val = 0;
                 printf("you chose O");
                 //mode[10] = "O";
                 char o[10] = "Oct";
                 strcpy(mode, o);
-                get_operand(mode[0]); //changes input type to octal mode, ie user enters number with an octal base
+                //get_operand(mode[0]); //changes input type to octal mode, ie user enters number with an octal base
                 break;
             case 'H':
-                val = 0;
                 printf("you chose H");
                 char h[3] = "Hex";
                 strcpy(mode, h);
                 break;
             case 'D': 
-                val = 0;
                 printf("you chose D");
                 char d[3] = "Dec";
                 strcpy(mode, d);
                 break;
             case 'C':
-                printf("this clears the value");
+                printf("this clears the value\n");
                 val = 0;
                 break;
             case 'S': //user should set value with base in mind
