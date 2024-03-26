@@ -1,14 +1,15 @@
 // Daniel Knight
 // CSCI 304
-// 2/27/24
-// Assignment 4 - Base Convertor
-// Program shall display a value in various base representations.
+// 3/26q/24
+// Assignment 6 - Base Calculator
+// Program perform various bitwise and arithmetic operations
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include "calc.h"
 
 void print_bases(short val, char mode)
 {
@@ -28,7 +29,6 @@ void print_bases(short val, char mode)
         case 'D':
             strcpy(cmode, dec_str);
             break;
-
     }
 
     for (size_t i = 0; i<41; ++i)
@@ -115,10 +115,9 @@ int main(void)
         switch(opt) {
             case 'O':
                 printf("you chose O");
-                //mode[10] = "O";
+                //mode[10]= "O";
                 char o[10] = "Oct";
                 strcpy(mode, o);
-                //get_operand(mode[0]); //changes input type to octal mode, ie user enters number with an octal base
                 break;
             case 'H':
                 printf("you chose H");
@@ -135,21 +134,17 @@ int main(void)
                 val = 0;
                 break;
             case 'S': //user should set value with base in mind
-                //int newVal;
                 printf("please enter a number: ");
                 int newVal = get_operand(mode[0]); //returns input in appropriate base form
                 val = newVal; //updates menu value
                 break;
             case 'Q':
-                printf("Ending program....\n");
-                sleep(1);
                 quit ++;
                 break;
             default:
                 quit++;
                 break;
         }
-        
     }
 
     return 0;
