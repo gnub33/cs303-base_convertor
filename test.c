@@ -12,6 +12,29 @@
 #include <math.h>
 #include "calc.h"
 
+void convert_to_binary(short val, bin_str bin){
+    // convert short val to binary str for output
+    // only needs to display val as binary, so don't return anything
+    //take val 7 and turn it into 111; may use modulo to gett remainder
+    bin_str new_bin;
+    while(val > 0) { //proivdes a string but backwards 1101
+        if (val%2 != 0) {
+            strcpy(new_bin, "1"); 
+        }
+        else
+            strcpy(new_bin, "0");
+        val = val/2;
+    }
+    //reverse string 
+    // retuns nothing, just changes binary string
+    for (int i = 0, j = strlen(new_bin)-1; i <= j; i--) { 
+        char c = new_bin[i];
+        bin[i] = new_bin[j];
+        bin[j] = c;
+        printf("%c", bin[i]);
+    }
+    strcpy(bin, new_bin);
+}
 
 void print_bases(short val, char mode)
 {
@@ -22,15 +45,13 @@ void print_bases(short val, char mode)
     char dec_str[4] = "Dec";
     char bi_str[4] = "Bin";
 
-    //bin_str binary = "0000 0000 00000 000";
-    bin_str binary = "0000000000000000";
+    bin_str binary = "0000 0000 0000 0000";
     //convert_to_binary(val, binary);
 
     switch(mode)
     {
         case 'B':
             strcpy(cmode, bi_str);
-            convert_to_binary(val, binary);
             break;
         case 'O':
             strcpy(cmode, oct_str);
@@ -47,7 +68,8 @@ void print_bases(short val, char mode)
         putchar('*');
     printf("\n");
     printf("* Base values:          Input Mode: %s\n", cmode);
-    printf("*   Binary  :%s\n", binary); //place holder, should display binary string
+    printf("*   Binary  : %s\n", binary);
+   // convert_to_binary(val, binary);
     printf("*   Hex     : %04hX\n", val);
     printf("*   Octal   : %06ho\n", val);
     printf("*   Decimal : %hd\n", val);
@@ -143,28 +165,7 @@ short get_operand(char mode)//tells program how to interpret input
     return baseVal;
 };
 
-void convert_to_binary(short val, bin_str bin){
-    // convert short val to binary str for output
-    // only needs to display val as binary, so don't return anything
-    //take val 7 and turn it into 111; may use modulo to gett remainder
-    bin_str new_bin;
-    while(val > 0) { //proivdes a string but backwards 1101
-        if (val%2 != 0) {
-            strcpy(new_bin, "1"); 
-        }
-        else
-            strcpy(new_bin, "0");
-        val = val/2;
-    }
-    //reverse string 
-    // retuns nothing, just changes binary string
-    for (int i = 0, j = strlen(new_bin)-1; i <= j; i--) { 
-        char c = new_bin[i];
-        bin[i] = new_bin[j];
-        bin[j] = c;
-    }
-    strcpy(bin, new_bin);
-}
+
 
 void add (short *val, char mode) {
     // call get_operand to get value in mode

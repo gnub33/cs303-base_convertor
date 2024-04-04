@@ -4,8 +4,7 @@
 #ifndef CALC_H
 #define CALC_H
 
-//declarations
-typedef char bin_str[20];
+typedef char bin_str [20];
 
 #endif
 
